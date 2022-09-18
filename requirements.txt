@@ -1,0 +1,11 @@
+certifi @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_83242e7e-f82d-4a71-8ef2-9d71d212d249gu_wxmeq/croots/recipe/certifi_1655968827803/work/certifi
+cfgv==3.3.1
+distlib==0.3.6
+filelock==3.8.0
+identify==2.5.5
+nodeenv==1.7.0
+platformdirs==2.5.2
+pre-commit==2.20.0
+PyYAML==6.0
+toml==0.10.2
+virtualenv==20.16.5
