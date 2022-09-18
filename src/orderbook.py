@@ -154,7 +154,6 @@ class Orderbook:
                 )
                 if n % maximum_concurrent_calls == 0:
                     await asyncio.gather(*tasks)
-                    # print(self.client.response.headers["x-mbx-used-weight"])
 
                     time.sleep(self.determine_sleep_period())
                     tasks = []
@@ -163,10 +162,7 @@ class Orderbook:
                 await asyncio.gather(*tasks)
 
             logger.info("Done")
-            # result = f"Done with {self.current_currency}"
 
-            # if (int(self.client.response.headers["x-mbx-used-weight"]) > 60 and result):
-            #     time.sleep(self.determine_sleep_period())
         return
 
     def determine_number_of_concurrent_calls(
