@@ -21,7 +21,7 @@ class Orderbook:
         window_size: str,
         base_path: str,
         # dd-mm-yyyy
-        start_date: str = "17-04-2022",
+        start_date: str = "01-01-2020",
     ):
         """Retrieves all the orderbook data from a crypto-exhange and stores it in a
         predefined location.
@@ -372,14 +372,13 @@ class Orderbook:
                 file=filename,
                 dtypes=[
                     pl.Datetime,
+                    pl.Datetime,
                     pl.datatypes.Float64,
                     pl.datatypes.Float64,
                     pl.datatypes.Float64,
                     pl.datatypes.Float64,
                     pl.datatypes.Float64,
-                    pl.datatypes.Int64,
                     pl.datatypes.Float64,
-                    pl.datatypes.Int64,
                     pl.datatypes.Float64,
                     pl.datatypes.Float64,
                     pl.datatypes.Int64,
@@ -425,18 +424,20 @@ class Orderbook:
         orderbook_data = pl.DataFrame(klines, columns=columns)
         orderbook_data = orderbook_data.select(
             [
-                pl.col("timestamp").cast(pl.Datetime("ms")),
-                pl.col("open").cast(pl.datatypes.Float64),
-                pl.col("high").cast(pl.datatypes.Float64),
-                pl.col("low").cast(pl.datatypes.Float64),
-                pl.col("close").cast(pl.datatypes.Float64),
-                pl.col("volume").cast(pl.datatypes.Float64),
-                pl.col("close_time").cast(pl.datatypes.Int64),
-                pl.col("quote_av").cast(pl.datatypes.Float64),
-                pl.col("trades").cast(pl.datatypes.Int64),
-                pl.col("tb_base_av").cast(pl.datatypes.Float64),
-                pl.col("tb_quote_av").cast(pl.datatypes.Float64),
-                pl.col("ignore").cast(pl.datatypes.Int64),
+                pl.col(["timestamp", "close_time"]).cast(pl.Datetime("ms")),
+                pl.col(
+                    [
+                        "open",
+                        "high",
+                        "low",
+                        "close",
+                        "volume",
+                        "quote_av",
+                        "tb_base_av",
+                        "tb_quote_av",
+                    ]
+                ).cast(pl.Float64),
+                pl.col("trades"),
                 pl.lit(symbol).alias("symbol"),
             ]
         )
