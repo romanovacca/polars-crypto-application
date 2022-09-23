@@ -8,7 +8,6 @@ import backoff
 import polars as pl
 from binance import AsyncClient
 from binance.exceptions import BinanceAPIException
-
 from src.utils.helpers import deprecated_coins, logger
 
 logger = logger("orderbook")
