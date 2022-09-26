@@ -20,7 +20,7 @@ class Orderbook:
         window_size: str,
         base_path: str,
         # dd-mm-yyyy
-        start_date: str = "01-01-2020",
+        start_date: str = "01-09-2022",
     ):
         """Retrieves all the orderbook data from a crypto-exhange and stores it in a
         predefined location.
@@ -226,6 +226,8 @@ class Orderbook:
         """A single call to get information on how much a call will cost to prevent
         rate limits."""
         if self.current_currency.upper() == "BTC":
+            symbol = "ETH"
+        elif self.current_currency.upper() == "USDT":
             symbol = "ETH"
         else:
             raise ValueError(
