@@ -4,7 +4,7 @@ from part2.src.indicators.indicator import Indicator
 
 
 class BollingerBands(Indicator):
-    def __init__(self, window: int, multiplier: int = 2):
+    def __init__(self, window: int = 20, multiplier: int = 2):
         self.name = "Bollinger Bands"
         self.type = ["Volatility"]
         self.window = window

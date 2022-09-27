@@ -1,7 +1,7 @@
-import polars as pl
+import pandas as pd
 
-from part2.src.indicators.average_true_range import AverageTrueRange
-from part2.src.indicators.indicator import Indicator
+from part2.src.pandas.indicators.average_true_range import AverageTrueRange
+from part2.src.pandas.indicators.indicator import Indicator
 
 
 class KeltnerChannels(Indicator):
@@ -20,7 +20,7 @@ class KeltnerChannels(Indicator):
     def get_window(self):
         return self.window
 
-    def run(self, df: pl.DataFrame) -> pl.DataFrame:
+    def run(self, df: pd.DataFrame) -> pd.DataFrame:
         """Calculates the Keltner Channels by using the Average True Range.
 
         :param df: Dataframe which contains data to calculate the indicator.
@@ -28,14 +28,10 @@ class KeltnerChannels(Indicator):
         average_true_range = AverageTrueRange(self.window)
         df = average_true_range.run(df)
 
-        df = df.select(
-            [
-                (
-                    pl.col("sma") + (pl.col("average_true_range") * self.multiplier)
-                ).alias("upper_keltner"),
-                (
-                    pl.col("sma") - (pl.col("average_true_range") * self.multiplier)
-                ).alias("lower_keltner"),
-            ]
+        df["upper_keltner"] = df["sma"].values + (
+            df["average_true_range"].values * self.multiplier
+        )
+        df["lower_keltner"] = df["sma"].values - (
+            df["average_true_range"].values * self.multiplier
         )
         return df

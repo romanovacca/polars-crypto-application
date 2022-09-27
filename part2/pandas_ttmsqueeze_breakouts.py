@@ -2,7 +2,7 @@ import os
 import time
 from typing import List
 
-from part2.src.indicators.ttm_squeeze import TTMSqueeze
+from part2.src.pandas.indicators.ttm_squeeze import TTMSqueeze
 from part2.src.utils.dataloader import DataLoader
 from part2.src.utils.helpers import logger
 
@@ -34,7 +34,7 @@ def main():
     ttm_squeeze = TTMSqueeze(window=20)
     breakouts = run_indicator_for_all_files(
         path="/Users/romanovacca/Documents/Coding/git_projects/polars-crypto-application-part-1/part-1/data/USDT/",
-        intervals=["1d", "2d"],
+        intervals=["1d", "2d", "3d", "7d"],
         squeeze_indicator=ttm_squeeze,
     )
 
