@@ -62,6 +62,7 @@ class TTMSqueeze(Indicator):
                 # if the file doesn't have row go to the next one
                 if len(df) == 0:
                     break
+
             else:
                 # second iteration no need to read file again but change the df interval
                 df = dataloader.to_interval_pandas(df, interval)
@@ -112,7 +113,8 @@ class TTMSqueeze(Indicator):
 
         :param df: Dataframe which contains data to determine if symbol is breaking out.
         """
-        last_value_off = df["squeeze_off"].values[-1]
-        second_to_last_value_on = df["squeeze_on"].values[-2]
-        if last_value_off and second_to_last_value_on:
-            return True
+        if len(df) >= 2:
+            last_value_off = df["squeeze_off"].values[-1]
+            second_to_last_value_on = df["squeeze_on"].values[-2]
+            if last_value_off and second_to_last_value_on:
+                return True

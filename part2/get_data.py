@@ -1,8 +1,8 @@
 import asyncio
 import configparser
 
-from src.orderbook import Orderbook
 from src.utils.helpers import logger
+from src.utils.orderbook import Orderbook
 
 logger = logger("main")
 config = configparser.ConfigParser()
@@ -19,7 +19,7 @@ async def main():
     )
 
     logger.info("Start retrieving all data.")
-    await orderbook.get_orderbook(action="initial_load", to_write=True)
+    await orderbook.get_orderbook(action="update", to_write=True)
 
     logger.info("Done processing all data.")
     await client.close_connection()

@@ -20,7 +20,7 @@ class Orderbook:
         window_size: str,
         base_path: str,
         # dd-mm-yyyy
-        start_date: str = "01-01-2022",
+        start_date: str = "28-03-2022",
     ):
         """Retrieves all the orderbook data from a crypto-exhange and stores it in a
         predefined location.
@@ -123,6 +123,8 @@ class Orderbook:
         :param action: The action to perform. Can be "create", "update", "retrieve".
         :param to_write: Whether the data has to be written to a file or not.
         """
+
+        logger.info("Get available pairs")
         await self.get_available_pairs()
 
         tasks = []
@@ -131,12 +133,14 @@ class Orderbook:
             self.current_currency = base_currency
             self.current_path = self.base_path + self.current_currency
 
+            logger.info("Calculating single api call")
             single_api_call_cost = await self.calculate_single_api_call_cost(
                 action=action,
                 to_write=to_write,
             )
             if i == 0:
                 single_api_call_cost = single_api_call_cost - 2
+            logger.info("Determine number of concurrent calls")
             maximum_concurrent_calls = self.determine_number_of_concurrent_calls(
                 single_api_call_cost=single_api_call_cost, base_currency=base_currency
             )
@@ -154,10 +158,12 @@ class Orderbook:
                 if n % maximum_concurrent_calls == 0:
                     await asyncio.gather(*tasks)
 
+                    logger.info("Maximum calls reached for the minute.")
                     time.sleep(self.determine_sleep_period())
                     tasks = []
 
             if len(tasks) > 0:
+                logger.info("Gathering lasts tasks")
                 await asyncio.gather(*tasks)
 
             logger.info("Done")
@@ -385,7 +391,12 @@ class Orderbook:
                     pl.datatypes.Int64,
                 ],
             )
-            df = df.with_column(pl.col("timestamp").dt.cast_time_unit("ms"))
+            df = df.with_columns(
+                [
+                    pl.col("timestamp").dt.cast_time_unit("ms"),
+                    pl.col("close_time").dt.cast_time_unit("ms"),
+                ]
+            )
         else:
             # initial load
             df = pl.DataFrame()
@@ -461,13 +472,10 @@ class Orderbook:
             # drop first row to prevent duplicates when concatenating dataframes
             orderbook_data = orderbook_data[1:]
             orderbook_data = existing_data_df.vstack(orderbook_data)
-            add_header = False
-        else:
-            add_header = True
 
         # necessary otherwise the record with be written with a "T" between date and time
         orderbook_data = orderbook_data.with_column(
             pl.col("timestamp").dt.strftime("%Y-%m-%d %H:%M:%S")
         )
-        orderbook_data.write_csv(file=filename, has_header=add_header)
+        orderbook_data.write_csv(file=filename)
         return

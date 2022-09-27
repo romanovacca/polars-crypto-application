@@ -119,7 +119,8 @@ class TTMSqueeze(Indicator):
 
         :param df: Dataframe which contains data to determine if symbol is breaking out.
         """
-        last_value_off = df[-1, "squeeze_off"]
-        second_to_last_value_on = df[-2, "squeeze_on"]
-        if last_value_off and second_to_last_value_on:
-            return True
+        if len(df) >= 2:
+            last_value_off = df[-1, "squeeze_off"]
+            second_to_last_value_on = df[-2, "squeeze_on"]
+            if last_value_off and second_to_last_value_on:
+                return True

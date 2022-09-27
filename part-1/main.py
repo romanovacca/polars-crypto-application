@@ -18,7 +18,7 @@ async def main():
         key=config["BINANCE"]["API_KEY"], secret=config["BINANCE"]["API_SECRET"]
     )
 
-    logger.info("Start retrieving all data.")
+    logger.info("Start retrieving the data.")
     await orderbook.get_orderbook(action="initial_load", to_write=True)
 
     logger.info("Done processing all data.")
