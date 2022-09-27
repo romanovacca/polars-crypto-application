@@ -1,13 +1,19 @@
+from typing import List
+
 import polars as pl
 
-from part2.src.indicators.indicator import Indicator
+from part2.src.utils.indicator import Indicator
 
 
 class BollingerBands(Indicator):
-    def __init__(self, window: int = 20, multiplier: int = 2):
-        self.name = "Bollinger Bands"
-        self.type = ["Volatility"]
-        self.window = window
+    def __init__(
+        self,
+        name: str = "Bollinger Bands",
+        type: List = ["Volatility"],
+        window: int = 20,
+        multiplier: int = 2,
+    ):
+        super().__init__(name, type, window)
         self.multiplier = multiplier
 
     def get_name(self):

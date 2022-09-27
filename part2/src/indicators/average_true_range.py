@@ -1,13 +1,18 @@
+from typing import List
+
 import polars as pl
 
-from part2.src.indicators.indicator import Indicator
+from part2.src.utils.indicator import Indicator
 
 
 class AverageTrueRange(Indicator):
-    def __init__(self, window: int):
-        self.name = "Average True Range"
-        self.type = ["Volatility"]
-        self.window = window
+    def __init__(
+        self,
+        name: str = "Average True Range",
+        type: List = ["Volatility"],
+        window: int = 20,
+    ):
+        super().__init__(name, type, window)
 
     def get_name(self):
         return self.name

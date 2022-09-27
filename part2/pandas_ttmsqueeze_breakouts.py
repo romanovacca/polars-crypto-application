@@ -12,7 +12,6 @@ logger = logger("main")
 def run_indicator_for_all_files(
     path: str, intervals: List, squeeze_indicator: TTMSqueeze
 ):
-    breakouts = []
     dataloader = DataLoader()
 
     start_time = time.time()
@@ -22,24 +21,21 @@ def run_indicator_for_all_files(
                 path=path, file=file, intervals=intervals, dataloader=dataloader
             )
             if breakout:
-                breakouts.append(breakout)
+                logger.info(breakout)
     print("whole loop --- %s seconds ---" % (time.time() - start_time))
 
-    return breakouts
+    return
 
 
 def main():
     logger.info("Started main.")
 
-    ttm_squeeze = TTMSqueeze(window=20)
-    breakouts = run_indicator_for_all_files(
+    ttm_squeeze = TTMSqueeze()
+    run_indicator_for_all_files(
         path="/Users/romanovacca/Documents/Coding/git_projects/polars-crypto-application-part-1/part-1/data/USDT/",
         intervals=["1d", "2d", "3d", "7d"],
         squeeze_indicator=ttm_squeeze,
     )
-
-    for breakout in breakouts:
-        print(breakout)
 
 
 if __name__ == "__main__":

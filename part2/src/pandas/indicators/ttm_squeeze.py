@@ -3,21 +3,26 @@ from typing import List
 import pandas as pd
 
 from part2.src.pandas.indicators.bollinger_bands import BollingerBands
-from part2.src.pandas.indicators.indicator import Indicator
 from part2.src.pandas.indicators.keltner_channels import KeltnerChannels
+from part2.src.utils.indicator import Indicator
 
 
 class TTMSqueeze(Indicator):
-    def __init__(self, window: int, bb_multiplier: int = 2, kc_multiplier: int = 2):
+    def __init__(
+        self,
+        name: str = "ttm_squeeze",
+        type: List = ["Volatility", "Momentum"],
+        window: int = 20,
+        bb_multiplier: int = 2,
+        kc_multiplier: int = 2,
+    ):
         """
 
         :param window: Length of the interval that should be used.
         :param bb_multiplier:
         :param kc_multiplier:
         """
-        self.name = "ttm_squeeze"
-        self.type = ["Volatility", "Momentum"]
-        self.window = window
+        super().__init__(name, type, window)
         self.bb_multiplier = bb_multiplier
         self.kc_multiplier = kc_multiplier
 
@@ -47,7 +52,7 @@ class TTMSqueeze(Indicator):
 
     def _scan_for_squeeze_breakouts_pandas(
         self, path: str, file: str, intervals: List, dataloader
-    ):
+    ) -> List:
         breakouts = []
         for i, interval in enumerate(intervals):
             if i == 0:
@@ -76,12 +81,8 @@ class TTMSqueeze(Indicator):
         :param df: Dataframe which contains data to calculate the indicator
         """
 
-        bollinger_bands = BollingerBands(
-            window=self.window, multiplier=self.bb_multiplier
-        )
-        keltner_channels = KeltnerChannels(
-            window=self.window, multiplier=self.kc_multiplier
-        )
+        bollinger_bands = BollingerBands(multiplier=self.bb_multiplier)
+        keltner_channels = KeltnerChannels(multiplier=self.kc_multiplier)
 
         df = bollinger_bands.run(df)
         df = keltner_channels.run(df)

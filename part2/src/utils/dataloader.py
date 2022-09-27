@@ -24,14 +24,16 @@ class DataLoader:
             df = self.to_interval_polars(df, interval)
         return df
 
-    def read_file_to_interval_pandas(self, path: str, file: str, interval: str):
+    def read_file_to_interval_pandas(
+        self, path: str, file: str, interval: str
+    ) -> pd.DataFrame:
         df = pd.read_csv(path + "/" + file)
         df.index = pd.DatetimeIndex(df["timestamp"])
         if len(df) > 0:
             df = self.to_interval_pandas(df, interval)
         return df
 
-    def to_interval_pandas(self, df: pd.DataFrame, interval: str):
+    def to_interval_pandas(self, df: pd.DataFrame, interval: str) -> pd.DataFrame:
         """Resamples the dataframe to the according interval.
 
         :param df: Dataframe that has to be resampled.
