@@ -30,5 +30,3 @@ repos:
         args:
           - --ignore=E203,E266,E501,W503,F403,F401,E402,F405,F541,E731,E722,F841,E711,E712
           - --max-line-length=88
-          - --max-complexity=70
-          - --select=B,C,E,F,W,T4,B9
