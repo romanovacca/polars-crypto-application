@@ -33,7 +33,7 @@ def main():
     ttm_squeeze = TTMSqueeze()
     run_indicator_for_all_files(
         path="data/USDT/",
-        intervals=["1d", "2d", "3d", "7d"],
+        intervals=["1h", "2h", "4h", "8h", "12h", "1d", "2d", "3d", "7d"],
         squeeze_indicator=ttm_squeeze,
     )
 

@@ -87,10 +87,10 @@ class TTMSqueeze(Indicator):
 
         df = bollinger_bands.run(df)
         df = keltner_channels.run(df)
-        df = self._calculate_squeeze_pandas(df)
+        df = self.calculate_squeeze_pandas(df)
         return df
 
-    def _calculate_squeeze_pandas(self, df: pd.DataFrame) -> pd.DataFrame:
+    def calculate_squeeze_pandas(self, df: pd.DataFrame) -> pd.DataFrame:
         """Calculates if a squeeze is present or not.
 
         :param df: Dataframe which contains data to calculate the indicator
