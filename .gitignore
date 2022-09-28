@@ -10,3 +10,7 @@ part2/data/
 part2/src/indicators/__pycache__/
 part2/src/utils/__pycache__/
 part2/src/pandas/indicators/__pycache__/
+part2/tests/__pycache__/
+part2/tests/indicators/__pycache__/
+
+.pytest_cache
