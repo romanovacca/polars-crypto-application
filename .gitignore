@@ -1,12 +1,12 @@
 .idea/
 .DS_Store
 config.ini
-part-1/data/BTC/*
-part-1/data/USDT/*
+part1/data/BTC/*
+part1/data/USDT/*
 
 src/__pycache__/
 src/utils/__pycache__/
-part2/data/
+part2/data/USDT/*
 part2/src/indicators/__pycache__/
 part2/src/utils/__pycache__/
 part2/src/pandas/indicators/__pycache__/

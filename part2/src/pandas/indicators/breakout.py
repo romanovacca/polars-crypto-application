@@ -46,7 +46,7 @@ def is_breaking_out(df, file, percentage=2.0):
 
 
 def main(
-    data_directory="/Users/romanovacca/Documents/Coding/git_projects/polars-crypto-application-part-1/part-1/data/USDT/",
+    data_directory="/Users/romanovacca/Documents/Coding/git_projects/polars-crypto-application-part1/part1/data/USDT/",
 ):
     logger.info("")
 

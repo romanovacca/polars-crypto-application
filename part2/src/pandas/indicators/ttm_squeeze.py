@@ -18,9 +18,9 @@ class TTMSqueeze(Indicator):
     ):
         """
 
-        :param window: Length of the interval that should be used.
-        :param bb_multiplier:
-        :param kc_multiplier:
+        :param window: The amount of datapoints that should be taken into consideration.
+        :param bb_multiplier: Multiplier value to adjust the working of the indicator.
+        :param kc_multiplier: Multiplier value to adjust the working of the indicator.
         """
         super().__init__(name, type, window)
         self.bb_multiplier = bb_multiplier

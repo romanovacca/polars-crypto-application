@@ -4,6 +4,12 @@ from typing import List
 
 class Indicator(metaclass=ABCMeta):
     def __init__(self, name: str, type: List, window: int):
+        """Base class for all the indicators
+
+        :param name: Name of the indicator
+        :param type: The type of indicator. e.g. volatility-based, or momentum
+        :param window: The amount of datapoints that should be taken into consideration.
+        """
         self.name = name
         self.type = type
         self.window = window

@@ -1,6 +1,3 @@
-import re
-from typing import List
-
 import pandas as pd
 import polars as pl
 
@@ -27,6 +24,12 @@ class DataLoader:
     def read_file_to_interval_pandas(
         self, path: str, file: str, interval: str
     ) -> pd.DataFrame:
+        """Reads a file and converts it to requested timestamp using pandas
+
+        :param path: Directory that contains the data.
+        :param file: Name of the file.
+        :param interval: Interval the dataframe should have.
+        """
         df = pd.read_csv(path + "/" + file)
         df.index = pd.DatetimeIndex(df["timestamp"])
         if len(df) > 0:
@@ -66,9 +69,3 @@ class DataLoader:
         )
 
         return df_resampled
-
-    # @staticmethod
-    # def process_interval(interval: str):
-    #     rule = re.search(r"[A-z]+", interval).group()
-    #     n = int(re.search("\d+", interval).group())
-    #     return rule, n

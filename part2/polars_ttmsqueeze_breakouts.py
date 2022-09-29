@@ -22,7 +22,7 @@ def run_indicator_for_all_files(
             )
             if breakout:
                 logger.info(breakout)
-    print("whole loop --- %s seconds ---" % (time.time() - start_time))
+    logger.info("whole loop --- %s seconds ---" % (time.time() - start_time))
 
     return
 
