@@ -11,7 +11,7 @@ config.read("config.ini")
 
 async def main():
     logger.info("Started main.")
-    orderbook = Orderbook(base_currencies=["USDT"], window_size="5m", base_path="data/")
+    orderbook = Orderbook(base_currencies=["BTC"], window_size="1h", base_path="data/")
 
     logger.info("Initializing Binance exchange client.")
     client = await orderbook.set_client(

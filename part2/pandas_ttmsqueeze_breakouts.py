@@ -6,7 +6,7 @@ from part2.src.pandas.indicators.ttm_squeeze import TTMSqueeze
 from part2.src.utils.dataloader import DataLoader
 from part2.src.utils.helpers import logger
 
-logger = logger("main")
+logger = logger("pandas_ttm_squeeze_breakouts")
 
 
 def run_indicator_for_all_files(
