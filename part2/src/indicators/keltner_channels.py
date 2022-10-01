@@ -9,8 +9,8 @@ from part2.src.utils.indicator import Indicator
 class KeltnerChannels(Indicator):
     def __init__(
         self,
-        name: str = ["Keltner Channels"],
-        type: List = "Volatility",
+        name: str = "Keltner Channels",
+        type: List = ["Volatility"],
         window: int = 20,
         multiplier: int = 2,
     ):
