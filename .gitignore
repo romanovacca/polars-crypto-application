@@ -1,5 +1,16 @@
 .idea/
 .DS_Store
-/data/BTC/*
+config.ini
+part1/data/BTC/*
+part1/data/USDT/*
+
 src/__pycache__/
 src/utils/__pycache__/
+part2/data/USDT/*
+part2/src/indicators/__pycache__/
+part2/src/utils/__pycache__/
+part2/src/pandas/indicators/__pycache__/
+part2/tests/__pycache__/
+part2/tests/indicators/__pycache__/
+
+.pytest_cache
